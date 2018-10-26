@@ -14,7 +14,7 @@ public class Procuder {
 	public static void main(String[] args) throws Exception {
 		//1 创建一个ConnectionFactory, 并进行配置
 		ConnectionFactory connectionFactory = new ConnectionFactory();
-		connectionFactory.setHost("192.168.11.76");
+		connectionFactory.setHost("47.99.198.77");
 		connectionFactory.setPort(5672);
 		connectionFactory.setVirtualHost("/");
 		
@@ -27,8 +27,13 @@ public class Procuder {
 		Map<String, Object> headers = new HashMap<>();
 		headers.put("my1", "111");
 		headers.put("my2", "222");
-		
-		
+
+
+        /**
+         * deliveryMode(2) 持久化
+         * expiration 过期时间
+         * headers 自定义属性
+         */
 		AMQP.BasicProperties properties = new AMQP.BasicProperties.Builder()
 				.deliveryMode(2)
 				.contentEncoding("UTF-8")

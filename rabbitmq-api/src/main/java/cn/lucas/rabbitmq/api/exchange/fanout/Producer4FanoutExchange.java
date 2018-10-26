@@ -11,7 +11,7 @@ public class Producer4FanoutExchange {
 		
 		//1 创建ConnectionFactory
 		ConnectionFactory connectionFactory = new ConnectionFactory();
-		connectionFactory.setHost("192.168.11.76");
+		connectionFactory.setHost("47.99.198.77");
 		connectionFactory.setPort(5672);
 		connectionFactory.setVirtualHost("/");
 		
