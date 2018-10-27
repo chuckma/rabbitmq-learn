@@ -29,11 +29,12 @@ public class Consumer {
 		channel.queueDeclare(queueName, true, false, false, null);
 		channel.queueBind(queueName, exchangeName, routingKey);
 		
-		//1 限流方式  第一件事就是 autoAck设置为 false
-		
+		// prefetchSize 消息大小限制 0 为不限制； prefetchCount 一次最多处理多少条消息；
+        // global false 在consumer 上限制 ；true 在channel 上限制
 		channel.basicQos(0, 1, false);
-		
-		channel.basicConsume(queueName, false, new MyConsumer(channel));
+
+        //1 限流方式  第一件事就是 autoAck设置为 false，否则上面 basicQos 设置的参数是无效的 。
+        channel.basicConsume(queueName, false, new MyConsumer(channel));
 		
 		
 	}

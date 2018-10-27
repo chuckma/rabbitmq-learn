@@ -25,7 +25,7 @@ public class MyConsumer extends DefaultConsumer {
 		System.err.println("properties: " + properties);
 		System.err.println("body: " + new String(body));
 		
-		channel.basicAck(envelope.getDeliveryTag(), false);
+//		channel.basicAck(envelope.getDeliveryTag(), false);
 		
 	}
 

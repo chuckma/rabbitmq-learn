@@ -27,6 +27,8 @@ public class MyConsumer extends DefaultConsumer {
 			e.printStackTrace();
 		}
 		if((Integer)properties.getHeaders().get("num") == 0) {
+		    // multiple 是否批量
+			// requeue true 重回队列，并将消息放到队尾；false 不重回队列
 			channel.basicNack(envelope.getDeliveryTag(), false, true);
 		} else {
 			channel.basicAck(envelope.getDeliveryTag(), false);

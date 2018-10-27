@@ -5,6 +5,15 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 
+/**
+ * 死信队列演示 Dead Letter Exchange
+ * 消息没有被消费，就成了死信
+ *
+ * 变成死信的情况
+ *      1. 消息被拒绝 basic.reject,basic.nack，requeue = false
+ *      2. TTL 过期
+ *      3. 队列达到最大长度
+ */
 public class Producer {
 
 	
