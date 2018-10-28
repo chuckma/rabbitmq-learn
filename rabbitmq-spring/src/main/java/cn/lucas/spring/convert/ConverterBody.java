@@ -1,4 +1,4 @@
-package com.bfxy.spring.convert;
+package cn.lucas.spring.convert;
 
 public class ConverterBody {
 

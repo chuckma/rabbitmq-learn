@@ -1,4 +1,4 @@
-package com.bfxy.spring.convert;
+package cn.lucas.spring.convert;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -24,7 +24,7 @@ public class PDFMessageConverter implements MessageConverter {
 		
 		byte[] body = message.getBody();
 		String fileName = UUID.randomUUID().toString();
-		String path = "d:/010_test/" + fileName + ".pdf";
+		String path = "/Users/lucasma/Desktop" + fileName + ".pdf";
 		File f = new File(path);
 		try {
 			Files.copy(new ByteArrayInputStream(body), f.toPath());

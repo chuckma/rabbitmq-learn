@@ -1,4 +1,4 @@
-package com.bfxy.spring.entity;
+package cn.lucas.spring.entity;
 
 public class Order {
 

@@ -1,4 +1,4 @@
-package com.bfxy.spring;
+package cn.lucas.spring;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -22,8 +22,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.bfxy.spring.entity.Order;
-import com.bfxy.spring.entity.Packaged;
+import cn.lucas.spring.entity.Order;
+import cn.lucas.spring.entity.Packaged;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringRunner.class)
@@ -54,19 +54,19 @@ public class ApplicationTests {
 		rabbitAdmin.declareBinding(new Binding("test.direct.queue",
 				Binding.DestinationType.QUEUE,
 				"test.direct", "direct", new HashMap<>()));
-		
+
 		rabbitAdmin.declareBinding(
 				BindingBuilder
 				.bind(new Queue("test.topic.queue", false))		//直接创建队列
 				.to(new TopicExchange("test.topic", false, false))	//直接创建交换机 建立关联关系
 				.with("user.#"));	//指定路由Key
-		
-		
+
+
 		rabbitAdmin.declareBinding(
 				BindingBuilder
-				.bind(new Queue("test.fanout.queue", false))		
+				.bind(new Queue("test.fanout.queue", false))
 				.to(new FanoutExchange("test.fanout", false, false)));
-		
+
 		//清空队列数据
 		rabbitAdmin.purgeQueue("test.topic.queue", false);
 	}
@@ -82,7 +82,7 @@ public class ApplicationTests {
 		messageProperties.getHeaders().put("desc", "信息描述..");
 		messageProperties.getHeaders().put("type", "自定义消息类型..");
 		Message message = new Message("Hello RabbitMQ".getBytes(), messageProperties);
-		
+
 		rabbitTemplate.convertAndSend("topic001", "spring.amqp", message, new MessagePostProcessor() {
 			@Override
 			public Message postProcessMessage(Message message) throws AmqpException {
@@ -152,7 +152,7 @@ public class ApplicationTests {
 		MessageProperties messageProperties = new MessageProperties();
 		//这里注意一定要修改contentType为 application/json
 		messageProperties.setContentType("application/json");
-		messageProperties.getHeaders().put("__TypeId__", "com.bfxy.spring.entity.Order");
+		messageProperties.getHeaders().put("__TypeId__", "cn.lucas.spring.entity.Order");
 		Message message = new Message(json.getBytes(), messageProperties);
 		
 		rabbitTemplate.send("topic001", "spring.order", message);
@@ -174,6 +174,7 @@ public class ApplicationTests {
 		MessageProperties messageProperties1 = new MessageProperties();
 		//这里注意一定要修改contentType为 application/json
 		messageProperties1.setContentType("application/json");
+		// order 是一个标签
 		messageProperties1.getHeaders().put("__TypeId__", "order");
 		Message message1 = new Message(json1.getBytes(), messageProperties1);
 		rabbitTemplate.send("topic001", "spring.order", message1);
@@ -189,6 +190,7 @@ public class ApplicationTests {
 		MessageProperties messageProperties2 = new MessageProperties();
 		//这里注意一定要修改contentType为 application/json
 		messageProperties2.setContentType("application/json");
+		// packaged 定义的标签
 		messageProperties2.getHeaders().put("__TypeId__", "packaged");
 		Message message2 = new Message(json2.getBytes(), messageProperties2);
 		rabbitTemplate.send("topic001", "spring.pack", message2);
@@ -196,14 +198,15 @@ public class ApplicationTests {
 	
 	@Test
 	public void testSendExtConverterMessage() throws Exception {
-//			byte[] body = Files.readAllBytes(Paths.get("d:/002_books", "picture.png"));
+
+//			byte[] body = Files.readAllBytes(Paths.get("/Users/lucasma/Desktop/", "WX20181027-084038@2x.png"));
 //			MessageProperties messageProperties = new MessageProperties();
 //			messageProperties.setContentType("image/png");
 //			messageProperties.getHeaders().put("extName", "png");
 //			Message message = new Message(body, messageProperties);
 //			rabbitTemplate.send("", "image_queue", message);
 		
-			byte[] body = Files.readAllBytes(Paths.get("d:/002_books", "mysql.pdf"));
+			byte[] body = Files.readAllBytes(Paths.get("/Users/lucasma/Desktop", "阿里巴巴Java开发手册1.4.0版.pdf"));
 			MessageProperties messageProperties = new MessageProperties();
 			messageProperties.setContentType("application/pdf");
 			Message message = new Message(body, messageProperties);

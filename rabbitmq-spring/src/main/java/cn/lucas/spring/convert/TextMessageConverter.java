@@ -1,4 +1,4 @@
-package com.bfxy.spring.convert;
+package cn.lucas.spring.convert;
 
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageProperties;

@@ -1,4 +1,4 @@
-package com.bfxy.spring.convert;
+package cn.lucas.spring.convert;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -27,7 +27,7 @@ public class ImageMessageConverter implements MessageConverter {
 		
 		byte[] body = message.getBody();
 		String fileName = UUID.randomUUID().toString();
-		String path = "d:/010_test/" + fileName + "." + extName;
+		String path = "/Users/lucasma/Desktop" + fileName + "." + extName;
 		File f = new File(path);
 		try {
 			Files.copy(new ByteArrayInputStream(body), f.toPath());

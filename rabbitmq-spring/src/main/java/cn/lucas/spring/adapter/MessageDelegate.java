@@ -1,14 +1,15 @@
-package com.bfxy.spring.adapter;
+package cn.lucas.spring.adapter;
 
 import java.io.File;
 import java.util.Map;
 
-import com.bfxy.spring.entity.Order;
-import com.bfxy.spring.entity.Packaged;
+import cn.lucas.spring.entity.Order;
+import cn.lucas.spring.entity.Packaged;
 
 
 public class MessageDelegate {
 
+    // 自定义 Adapter  methodName 必须是 handleMessage  源码查看 MessageListenerAdapter
 	public void handleMessage(byte[] messageBody) {
 		System.err.println("默认方法, 消息内容:" + new String(messageBody));
 	}
