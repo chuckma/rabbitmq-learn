@@ -1,4 +1,4 @@
-package com.bfxy.springboot;
+package cn.lucas.springboot;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.bfxy.springboot.entity.Order;
-import com.bfxy.springboot.producer.RabbitSender;
+import cn.lucas.springboot.entity.Order;
+import cn.lucas.springboot.producer.RabbitSender;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

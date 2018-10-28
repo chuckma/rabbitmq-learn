@@ -1,10 +1,10 @@
-package com.bfxy.springboot;
+package cn.lucas.springboot;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan({"com.bfxy.springboot.*"})
+@ComponentScan({"cn.lucas.springboot.*"})
 public class MainConfig {
 
 }

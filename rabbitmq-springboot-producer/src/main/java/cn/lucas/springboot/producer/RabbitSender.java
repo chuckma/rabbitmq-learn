@@ -1,4 +1,4 @@
-package com.bfxy.springboot.producer;
+package cn.lucas.springboot.producer;
 
 import java.util.Map;
 
@@ -12,7 +12,7 @@ import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
 
-import com.bfxy.springboot.entity.Order;
+import cn.lucas.springboot.entity.Order;
 
 @Component
 public class RabbitSender {
@@ -29,7 +29,9 @@ public class RabbitSender {
 			System.err.println("ack: " + ack);
 			if(!ack){
 				System.err.println("异常处理....");
-			}
+			}else{
+			    // 消息发送成功，执行相关业务逻辑
+            }
 		}
 	};
 	
@@ -49,7 +51,7 @@ public class RabbitSender {
 		Message msg = MessageBuilder.createMessage(message, mhs);
 		rabbitTemplate.setConfirmCallback(confirmCallback);
 		rabbitTemplate.setReturnCallback(returnCallback);
-		//id + 时间戳 全局唯一 
+		//id + 时间戳 全局唯一  业务规则定义 实际消息 ID
 		CorrelationData correlationData = new CorrelationData("1234567890");
 		rabbitTemplate.convertAndSend("exchange-1", "springboot.abc", msg, correlationData);
 	}
